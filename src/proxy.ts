@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
- 
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail'
@@ -17,6 +16,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.nextUrl))
   }
     
+  return NextResponse.next()
 }
 
  
